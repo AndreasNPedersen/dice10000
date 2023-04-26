@@ -1,4 +1,5 @@
 ﻿using dice10000.Interfaces;
+using dice10000.Models;
 
 namespace dice10000
 {
@@ -29,6 +30,43 @@ namespace dice10000
                     currentRound += 100;
             }
             return currentRound;
+        }
+
+        public int GetDiceValue(int diceValue, string dicesThisRound)
+        {
+            int roundValue = 0;
+            if (dicesThisRound.IndexOf(diceValue + "," + diceValue + "," + diceValue) >= 0)
+            {
+                // 3 dices with same numbers
+                roundValue = diceValue * 100;
+                                               
+                if (diceValue == 1)
+                    roundValue = 1000;
+
+                // 4 dices with same value
+                if (dicesThisRound.IndexOf(diceValue + "," + diceValue + "," + diceValue + "," + diceValue) >= 0)
+                {
+                    roundValue = diceValue * 100 * 2;
+                    if (diceValue == 1)
+                        roundValue = 2000;
+                }
+
+                // 5 dices with same value
+                if (dicesThisRound.IndexOf(diceValue + "," + diceValue + "," + diceValue + "," + diceValue + "," + diceValue) >= 0)
+                {
+                    roundValue = diceValue * 100 * 4;
+                    if (diceValue == 1)
+                        roundValue = 4000;
+                }
+                // 6 dices with same value
+                if (dicesThisRound.IndexOf(diceValue + "," + diceValue + "," + diceValue + "," + diceValue + "," + diceValue + "," + diceValue) >= 0)
+                {
+                    roundValue = diceValue * 100 * 8;
+                    if (diceValue == 1)
+                        roundValue = 10000;
+                }
+            }
+            return roundValue;
         }
     }
 }

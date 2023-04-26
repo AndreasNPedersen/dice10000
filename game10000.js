@@ -85,39 +85,29 @@ function RemoveDicesFromThisRound(DiceValue, DicesThisRoundArray) //removing dic
     return DicesThisRoundArray;
 }
 
-function GetDiceValue(DiceValue, fromAI, DicesThisRoundArray) // get the value from dice values with 3 or more of the same > 1
+async function GetDiceValue(DiceValue, fromAI, DicesThisRoundArray) // get the value from dice values with 3 or more of the same > 1
 {
 
     var DicesThisRoundString = DicesThisRoundArray.toString();
 
     if (DicesThisRoundString.indexOf(DiceValue + "," + DiceValue + "," + DiceValue) >= 0) {
+        let DiceMultiple = {
+            DiceValue:DiceValue,
+            DicesThisRoundArray:DicesThisRoundString
+        }
+
         console.log("DicesThisRoundString=" + DicesThisRoundString);
-        var RoundValue = DiceValue * 100; // 3 dices with same numbers
-        //   console.log("DiceValue * 100 = " + DiceValue * 100);
-        if (DiceValue == 1)
-            RoundValue = 1000
+        if (DicesThisRoundString.length > 0) {
+            const responseRule = await fetch('http://localhost:5091/api/dice/multipleCases', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(DiceMultiple)
+            }).then(response => response.json())
 
-        // 4 dices with same value
-        if (DicesThisRoundString.indexOf(DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue) >= 0) {
-            RoundValue = DiceValue * 100 * 2
-            if (DiceValue == 1)
-                RoundValue = 2000
+            currentRoundValue += Number(responseRule);
         }
-
-        // 5 dices with same value
-        if (DicesThisRoundString.indexOf(DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue) >= 0) {
-            RoundValue = DiceValue * 100 * 4
-            if (DiceValue == 1)
-                RoundValue = 4000
-        }
-        // 6 dices with same value
-        if (DicesThisRoundString.indexOf(DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue + "," + DiceValue) >= 0) {
-            RoundValue = DiceValue * 100 * 8
-            if (DiceValue == 1)
-                RoundValue = 10000
-        }
-
-        currentRoundValue += Number(RoundValue);
         // if (!fromAI) {
         return RemoveDicesFromThisRound(DiceValue, DicesThisRoundArray);
         //}
@@ -125,7 +115,7 @@ function GetDiceValue(DiceValue, fromAI, DicesThisRoundArray) // get the value f
     return DicesThisRoundArray;
 }
 
-function GetDiceValue2(fromAI) {
+async function GetDiceValue2(fromAI) {
     var diceValues = [];
     DicesThisRound.forEach(element => {
         diceValues.push(element);
@@ -133,7 +123,7 @@ function GetDiceValue2(fromAI) {
     diceValues.sort();
     for (var i = 1; i <= 6; i++) // dices with same value check for each value 2-6, both included
     {
-        diceValues = GetDiceValue(i, fromAI, diceValues);
+        diceValues = await GetDiceValue(i, fromAI, diceValues);
     }
     return diceValues;
 }
@@ -175,7 +165,7 @@ async function checkForPointsForOneRound(fromAI) //check for points with dice va
             DicesThisRound.push(GetDiceValueFromDiceId(DiceOnHoldThisRound[i]));
         }
         currentRound = currentRoundValue;
-        await checkValueForSingleCases(GetDiceValue2(0, fromAI));
+        await checkValueForSingleCases(await GetDiceValue2(0, fromAI));
         // console.log("logsingle=" + single.length);
 
         // console.log("logcurrentRoundValue=" + currentRoundValue);

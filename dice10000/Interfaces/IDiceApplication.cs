@@ -3,5 +3,6 @@
     public interface IDiceApplication
     {
         public int CheckValuesForSingleCasesRule(string DicesThisRoundString);
+        public int GetDiceValue(int diceValue, string dicesThisRound);
     }
 }

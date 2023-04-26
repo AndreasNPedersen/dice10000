@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dice10000", "dice10000.csproj", "{8862A9B1-7556-4E88-AB17-DA02CCE62505}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowDice10000", "..\SpecFlowDice10000\SpecFlowDice10000.csproj", "{6A93CA3F-9200-4CB3-BCD5-0CD88CD7FCC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8862A9B1-7556-4E88-AB17-DA02CCE62505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8862A9B1-7556-4E88-AB17-DA02CCE62505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8862A9B1-7556-4E88-AB17-DA02CCE62505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8862A9B1-7556-4E88-AB17-DA02CCE62505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A93CA3F-9200-4CB3-BCD5-0CD88CD7FCC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A93CA3F-9200-4CB3-BCD5-0CD88CD7FCC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A93CA3F-9200-4CB3-BCD5-0CD88CD7FCC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A93CA3F-9200-4CB3-BCD5-0CD88CD7FCC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {696FAE7F-24F1-4A90-879A-3B33713D3A4B}
+	EndGlobalSection
+EndGlobal
